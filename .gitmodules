@@ -7,3 +7,9 @@
 [submodule "zomato"]
 	path = zomato
 	url = https://github.com/priyanshu2304/Zomato-clone.git
+[submodule "App01"]
+	path = App01
+	url = git@github.com:priyanshu2304/app1.git
+[submodule "Styler02"]
+	path = Styler02
+	url = https://github.com/priyanshu2304/styler02.git
