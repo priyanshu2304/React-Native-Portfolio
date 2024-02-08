@@ -4,3 +4,6 @@
 [submodule "airbnb"]
 	path = airbnb
 	url = https://github.com/priyanshu2304/airbnb.git
+[submodule "zomato"]
+	path = zomato
+	url = https://github.com/priyanshu2304/Zomato-clone.git
