@@ -11,7 +11,7 @@ const PasswordSchema = Yup.object().shape({
 const App = () => {
   return (
     <View>
-      <Text>App</Text>
+      <Text>Apps</Text>
     </View>
   );
 };
