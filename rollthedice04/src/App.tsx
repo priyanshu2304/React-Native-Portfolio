@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   ImageSourcePropType,
@@ -17,6 +17,7 @@ import {
   useColorScheme,
   View,
   Image,
+  Pressable,
 } from 'react-native';
 
 import DiceOne from '../assets/One.png';
@@ -38,9 +39,39 @@ const Dice = ({imageUrl}: DiceProps): JSX.Element => {
   );
 };
 function App(): React.JSX.Element {
+  const [dice, setDice] = useState<ImageSourcePropType>(DiceOne);
+  const rollTheDice = () => {
+    let randomNumber = Math.floor(Math.random() * 6) + 1;
+    switch (randomNumber) {
+      case 1:
+        setDice(DiceOne);
+        break;
+      case 2:
+        setDice(DiceTwo);
+        break;
+      case 3:
+        setDice(DiceThree);
+        break;
+      case 4:
+        setDice(DiceFour);
+        break;
+      case 5:
+        setDice(DiceFive);
+        break;
+      case 6:
+        setDice(DiceSix);
+        break;
+      default:
+        setDice(DiceOne);
+        break;
+    }
+  };
   return (
-    <View>
-      <Text>hey</Text>
+    <View style={styles.container}>
+      <Dice imageUrl={dice} />
+      <Pressable onPress={rollTheDice}>
+        <Text style={styles.button}>Roll The Dice</Text>
+      </Pressable>
     </View>
   );
 }
@@ -49,6 +80,18 @@ const styles = StyleSheet.create({
   diceImage: {
     width: 200,
     height: 200,
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: '#787878',
+    padding: 10,
+    borderRadius: 4,
+    color: '#fff',
+    fontWeight: '600',
   },
 });
 
