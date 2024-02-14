@@ -1,14 +1,16 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React, {useState} from 'react';
 
-import {StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  Pressable,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import Snackbar from 'react-native-snackbar';
+import Icons from '../components/icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 function App(): React.JSX.Element {
   const [isCrossed, setIsCross] = useState<boolean>(false);
@@ -94,9 +96,42 @@ function App(): React.JSX.Element {
     checkIsWinner();
   };
   return (
-    <View>
-      <Text>Hey</Text>
-    </View>
+    <SafeAreaView>
+      <StatusBar />
+      {gameWinner ? (
+        <View style={[styles.playerInfo, styles.winnerInfo]}>
+          <Text style={styles.winnerTxt}>{gameWinner}</Text>
+        </View>
+      ) : (
+        <View
+          style={[
+            styles.playerInfo,
+            isCrossed ? styles.playerX : styles.playerO,
+          ]}>
+          <Text style={styles.gameTurnTxt}>
+            Player {isCrossed ? 'X' : 'O'}'s Turn
+          </Text>
+        </View>
+      )}
+      <FlatList
+        style={styles.grid}
+        numColumns={3}
+        data={gameState}
+        renderItem={({item, index}) => (
+          <Pressable
+            onPress={() => onChangeItem(index)}
+            key={index}
+            style={styles.card}>
+            <Icons name={item} />
+          </Pressable>
+        )}
+      />
+      <Pressable onPress={reloadGame} style={styles.gameBtn}>
+        <Text style={styles.gameBtnText}>
+          {gameWinner ? 'Start New Game' : 'Reload The Game'}
+        </Text>
+      </Pressable>
+    </SafeAreaView>
   );
 }
 
