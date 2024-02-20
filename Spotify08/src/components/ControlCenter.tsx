@@ -1,19 +1,25 @@
-import {Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {View, StyleSheet, Pressable} from 'react-native';
 import TrackPlayer, {State, usePlaybackState} from 'react-native-track-player';
-import {playbackService} from '../../musicPlayerServices';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {skipToPrevious} from 'react-native-track-player/lib/trackPlayer';
-const controlCenter = () => {
+
+import {playbackService} from '../../musicPlayerServices';
+
+const ControlCenter = () => {
   const playBackState = usePlaybackState();
+  // next button
   const skipToNext = async () => {
     await TrackPlayer.skipToNext();
   };
-  const previousButton = async () => {
+  // Previous button
+  const skipToPrevious = async () => {
     await TrackPlayer.skipToPrevious();
   };
-  const togglePlayBack = async (playback: State) => {
-    const currentTrack = await TrackPlayer.getActiveTrackIndex();
+
+  const togglePlayback = async (playback: State) => {
+    const currentTrack = await TrackPlayer.getCurrentTrack();
+    await TrackPlayer.play();
     if (currentTrack !== null) {
       if (playback === State.Paused || playback === State.Ready) {
         await TrackPlayer.play();
@@ -22,26 +28,26 @@ const controlCenter = () => {
       }
     }
   };
+
   return (
     <View style={styles.container}>
-      <Pressable onPress={previousButton}>
-        <Icon name="skip-previous" size={40} style={styles.icon} />
+      <Pressable onPress={skipToPrevious}>
+        <Icon style={styles.icon} name="skip-previous" size={40} />
       </Pressable>
-      <Pressable onPress={() => togglePlayBack(playBackState as any)}>
+      <Pressable onPress={() => togglePlayback(playBackState)}>
         <Icon
+          style={styles.icon}
           name={playBackState === State.Playing ? 'pause' : 'play-arrow'}
           size={75}
-          style={styles.icon}
         />
       </Pressable>
       <Pressable onPress={skipToNext}>
-        <Icon name="skip-next" size={40} style={styles.icon} />
+        <Icon style={styles.icon} name="skip-next" size={40} />
       </Pressable>
     </View>
   );
 };
 
-export default controlCenter;
 const styles = StyleSheet.create({
   container: {
     marginBottom: 56,
@@ -57,3 +63,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
   },
 });
+
+export default ControlCenter;
