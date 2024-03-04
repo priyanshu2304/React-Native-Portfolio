@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.14",
+    "@react-navigation/native-stack": "^6.9.22",
     "@rneui/base": "^4.0.0-rc.8",
     "@rneui/themed": "^4.0.0-rc.8",
     "appwrite": "^13.0.2",

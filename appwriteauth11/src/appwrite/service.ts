@@ -69,6 +69,7 @@ class AppwriteService {
 
   async logout() {
     try {
+      return await this.account.deleteSession('current');
     } catch (error) {
       Snackbar.show({
         text: String(error),
@@ -80,15 +81,11 @@ class AppwriteService {
 
   async getCurrentUser() {
     try {
-      return await this.account.deleteSession('current');
+      return await this.account.get();
     } catch (error) {
-      Snackbar.show({
-        text: String(error),
-        duration: Snackbar.LENGTH_LONG,
-      });
-      console.log('getCurrent User' + error);
+      console.log('Appwrite service :: getCurrentAccount() :: ' + error);
     }
   }
 }
 
-export default AppwriteService
+export default AppwriteService;
