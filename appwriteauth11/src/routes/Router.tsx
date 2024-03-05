@@ -24,10 +24,15 @@ const Router = () => {
         setIsLoggedIn(false);
       });
   }, [appwrite, setIsLoggedIn]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
-    <View>
-      <Text>Router</Text>
-    </View>
+    <NavigationContainer>
+      {isLoggedIn ? <AppStack /> : <AuthStack />}
+    </NavigationContainer>
   );
 };
 
