@@ -1,5 +1,4 @@
 import React, {FC, createContext} from 'react';
-
 import Appwrite from './service';
 import {PropsWithChildren} from 'react';
 import {useState} from 'react';
@@ -10,8 +9,11 @@ type AppContextType = {
   setIsLoggedIn: (isLoggedIn: boolean) => void;
 };
 
+// Create a new instance of Appwrite
+const appwriteInstance = new Appwrite();
+
 export const AppwriteContext = createContext<AppContextType>({
-  appwrite: new Appwrite(),
+  appwrite: appwriteInstance,
   isLoggedIn: false,
   setIsLoggedIn: () => {},
 });
@@ -19,12 +21,11 @@ export const AppwriteContext = createContext<AppContextType>({
 export const AppwriteProvider: FC<PropsWithChildren> = ({children}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const defaultValue = {
-    appwrite: new Appwrite(),
+    appwrite: appwriteInstance, // Use the same instance for all consumers
     isLoggedIn,
     setIsLoggedIn,
   };
 
-  console.log('se', isLoggedIn);
   return (
     <AppwriteContext.Provider value={defaultValue}>
       {children}
@@ -32,4 +33,4 @@ export const AppwriteProvider: FC<PropsWithChildren> = ({children}) => {
   );
 };
 
-export default AppwriteContext;
+export default {AppwriteProvider, AppwriteContext};
