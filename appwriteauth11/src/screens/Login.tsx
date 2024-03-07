@@ -7,7 +7,7 @@ import {
   Pressable,
   Platform,
 } from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 //react native elements
 import {FAB} from '@rneui/themed';
@@ -24,7 +24,7 @@ import {AuthStackParamList} from '../routes/AuthStack';
 type LoginScreenProps = NativeStackScreenProps<AuthStackParamList, 'Login'>;
 
 const Login = ({navigation}: LoginScreenProps) => {
-  const {appwrite, setIsLoggedIn} = useContext(AppwriteContext);
+  const {appwrite, setIsLoggedIn, isLoggedIn} = useContext(AppwriteContext);
 
   const [error, setError] = useState<string>('');
 
@@ -44,6 +44,7 @@ const Login = ({navigation}: LoginScreenProps) => {
         .then(response => {
           if (response) {
             setIsLoggedIn(true);
+
             Snackbar.show({
               text: 'Login Success',
               duration: Snackbar.LENGTH_SHORT,
@@ -56,6 +57,10 @@ const Login = ({navigation}: LoginScreenProps) => {
         });
     }
   };
+
+  useEffect(() => {
+    console.log('isLoggedIn', isLoggedIn);
+  }, [appwrite, isLoggedIn, setIsLoggedIn]);
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -95,7 +100,7 @@ const Login = ({navigation}: LoginScreenProps) => {
 
         {/* Sign up navigation */}
         <Pressable
-          onPress={() => navigation.navigate('Signup')}
+          onPress={() => navigation.navigate('SignUp')}
           style={styles.signUpContainer}>
           <Text style={styles.noAccountLabel}>
             Don't have an account?{'  '}

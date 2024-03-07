@@ -8,15 +8,15 @@ import AppStack from './AppStack';
 import AuthStack from './AuthStack';
 
 const Router = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const {appwrite, isLoggedIn, setIsLoggedIn} = useContext(AppwriteContext);
   useEffect(() => {
     appwrite
       .getCurrentUser()
       .then(response => {
-        setIsLoading(false);
+        setIsLoggedIn(false);
         if (response) {
-          setIsLoading(true);
+          setIsLoggedIn(true);
         }
       })
       .catch(error => {
@@ -28,7 +28,7 @@ const Router = () => {
   if (isLoading) {
     return <Loading />;
   }
-
+  console.log('isLoggedIn', isLoggedIn);
   return (
     <NavigationContainer>
       {isLoggedIn ? <AppStack /> : <AuthStack />}

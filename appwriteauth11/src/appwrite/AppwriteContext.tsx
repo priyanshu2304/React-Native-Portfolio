@@ -1,15 +1,16 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {FC, PropsWithChildren, createContext, useState} from 'react';
+import React, {FC, createContext} from 'react';
 
 import Appwrite from './service';
+import {PropsWithChildren} from 'react';
+import {useState} from 'react';
 
-type AppContectType = {
+type AppContextType = {
   appwrite: Appwrite;
   isLoggedIn: boolean;
   setIsLoggedIn: (isLoggedIn: boolean) => void;
 };
 
-export const AppwriteContext = createContext<AppContectType>({
+export const AppwriteContext = createContext<AppContextType>({
   appwrite: new Appwrite(),
   isLoggedIn: false,
   setIsLoggedIn: () => {},
@@ -23,6 +24,7 @@ export const AppwriteProvider: FC<PropsWithChildren> = ({children}) => {
     setIsLoggedIn,
   };
 
+  console.log('se', isLoggedIn);
   return (
     <AppwriteContext.Provider value={defaultValue}>
       {children}
@@ -31,5 +33,3 @@ export const AppwriteProvider: FC<PropsWithChildren> = ({children}) => {
 };
 
 export default AppwriteContext;
-
-const styles = StyleSheet.create({});
