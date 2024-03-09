@@ -3,7 +3,6 @@ export const CATEGORY_SUBCATEGORY = {
     {
       name: 'Packages',
       description: 'Curated packages to suit your need.',
-      image: req('../assets/images/one.jpg'),
       newImage: '/public/images/categories/new-packages.svg',
       id: 1,
       subCategory: [

@@ -28,7 +28,6 @@ const Router = () => {
   if (isLoading) {
     return <Loading />;
   }
-  console.log('isLoggedIn', isLoggedIn);
   return (
     <NavigationContainer>
       {isLoggedIn ? <AppStack /> : <AuthStack />}
