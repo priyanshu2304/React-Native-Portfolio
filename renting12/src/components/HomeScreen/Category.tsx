@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -58,7 +58,10 @@ const Category = () => {
             <View style={{marginRight: 20}}>
               <ImageBackground
                 source={getImageByCategory(item.name)}
-                style={styles.container}>
+                style={[
+                  styles.container,
+                  selectedCategory === item && styles.selectedCategory,
+                ]}>
                 <Text style={styles.textStyle}>{item.name}</Text>
               </ImageBackground>
             </View>
@@ -69,6 +72,10 @@ const Category = () => {
       />
       {selectedCategory && (
         <View style={styles.subCategoryListContainer}>
+          <View style={styles.arrowContainer}>
+            <View style={styles.arrow} />
+            <View style={styles.arrow1} />
+          </View>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -109,6 +116,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     overflow: 'hidden',
   },
+  selectedCategory: {
+    borderWidth: 2, // example style for selected category
+    borderColor: '#e3a110', // example style for selected category
+  },
   textStyle: {
     color: '#f7f7f7',
     fontWeight: '700',
@@ -116,13 +127,15 @@ const styles = StyleSheet.create({
   },
   subCategoryListContainer: {
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 20,
     borderWidth: 1,
-    padding: 10,
-    borderRadius: 4,
+    padding: 8,
+    borderRadius: 8,
+    borderColor: '#e3a110',
+    position: 'relative',
   },
   subCategoryContainer: {
-    padding: 5,
+    paddingHorizontal: 5,
     borderRadius: 5,
     marginRight: 5,
   },
@@ -133,5 +146,48 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     overflow: 'hidden',
     paddingTop: 5,
+    textAlign: 'center',
+  },
+  arrowContainer: {
+    position: 'absolute',
+    left: '50%',
+    top: -15,
+    transform: [{translateX: -8}],
+  },
+  arrow: {
+    width: 0,
+    height: 0,
+    backgroundColor: 'transparent',
+    borderStyle: 'solid',
+    borderTopWidth: 0,
+    borderRightWidth: 10,
+    borderBottomWidth: 10,
+    borderLeftWidth: 10,
+    borderTopColor: 'red',
+    borderRightColor: 'transparent',
+    borderBottomColor: '#e3a110',
+    borderLeftColor: 'transparent',
+    position: 'absolute',
+    top: 5,
+    left: '50%',
+    transform: [{translateX: -5}],
+  },
+  arrow1: {
+    width: 0,
+    height: 0,
+    backgroundColor: 'transparent',
+    borderStyle: 'solid',
+    borderTopWidth: 0,
+    borderRightWidth: 10,
+    borderBottomWidth: 10,
+    borderLeftWidth: 10,
+    borderTopColor: 'red',
+    borderRightColor: 'transparent',
+    borderBottomColor: '#f4f2f2',
+    borderLeftColor: 'transparent',
+    position: 'absolute',
+    top: 6,
+    left: '50%',
+    transform: [{translateX: -5}],
   },
 });
