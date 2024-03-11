@@ -661,3 +661,36 @@ export const CATEGORY_SUBCATEGORY = {
     },
   ],
 };
+
+export const PRODUCT = [
+  {
+    name: 'Venti Center table',
+    price: '323',
+    quantity: 1,
+    isAddedToCart: false,
+  },
+  {
+    name: 'Study table',
+    price: '123',
+    quantity: 1,
+    isAddedToCart: false,
+  },
+  {
+    name: 'Sheldon table',
+    price: '303',
+    quantity: 1,
+    isAddedToCart: false,
+  },
+  {
+    name: 'Penny chair',
+    price: '319',
+    quantity: 1,
+    isAddedToCart: false,
+  },
+  {
+    name: 'Coffee table',
+    price: '99',
+    quantity: 1,
+    isAddedToCart: false,
+  },
+];

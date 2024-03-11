@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#f4f2f2',
     borderLeftColor: 'transparent',
     position: 'absolute',
-    top: 6,
+    top: 7,
     left: '50%',
     transform: [{translateX: -5}],
   },
